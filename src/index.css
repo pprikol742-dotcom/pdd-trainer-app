@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-bg text-ink font-body antialiased;
+    overscroll-behavior: none;
+  }
+  ::selection {
+    @apply bg-accent/30 text-ink;
+  }
+  :focus-visible {
+    outline: 2px solid theme('colors.accent.DEFAULT');
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Разделитель-разметка: пунктир как осевая линия на дороге. Используется скупо, только как акцент. */
+  .lane-divider {
+    height: 2px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      theme('colors.accent.DEFAULT') 0px,
+      theme('colors.accent.DEFAULT') 10px,
+      transparent 10px,
+      transparent 20px
+    );
+    opacity: 0.35;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

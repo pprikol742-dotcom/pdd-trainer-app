@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B0D12" />
+    <meta name="description" content="Тренажёр для подготовки к теоретическому экзамену ПДД — 1600 вопросов, категории A,B и C,D, режим экзамена как в ГИБДД" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>ПДД Тренажёр</title>
+
+    <!--
+      Яндекс РСЯ, тот же JS-метод, что и в голосовом блокноте (для Capacitor/WebView
+      нативный SDK не обязателен). ID блоков ниже — ЗАГЛУШКИ. Реальные появятся только
+      после регистрации ЭТОГО приложения (ru.pddtrainer.app) в partner.yandex.ru —
+      блоки другого приложения сюда переносить нельзя, они привязаны к конкретному пакету.
+    -->
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+    <style>
+      #pdd-ad-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        text-align: center;
+        background: transparent;
+        transition: transform 0.2s ease;
+      }
+      #pdd-ad-banner.pdd-ad-hidden {
+        transform: translateY(100%);
+      }
+    </style>
+    <script>
+      window.PDD_AD_BLOCKS = {
+        banner: 'R-M-000000-1',       // ЗАМЕНИТЬ на реальный ID после регистрации в Яндекс.Партнёр
+        interstitial: 'R-M-000000-2', // ЗАМЕНИТЬ на реальный ID
+      };
+      window.pddAds = {
+        _bannerRendered: false,
+        showBanner: function () {
+          var el = document.getElementById('pdd-ad-banner');
+          if (el) el.classList.remove('pdd-ad-hidden');
+          if (this._bannerRendered) return;
+          this._bannerRendered = true;
+          window.yaContextCb = window.yaContextCb || [];
+          window.yaContextCb.push(function () {
+            Ya.Context.AdvManager.render({
+              blockId: window.PDD_AD_BLOCKS.banner,
+              renderTo: 'pdd-ad-banner-slot',
+            });
+          });
+        },
+        hideBanner: function () {
+          var el = document.getElementById('pdd-ad-banner');
+          if (el) el.classList.add('pdd-ad-hidden');
+        },
+        showInterstitial: function () {
+          window.yaContextCb = window.yaContextCb || [];
+          window.yaContextCb.push(function () {
+            Ya.Context.AdvManager.render({
+              blockId: window.PDD_AD_BLOCKS.interstitial,
+              renderTo: 'pdd-ad-interstitial-slot',
+              type: 'fullscreen',
+              onError: function () {},
+            });
+          });
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-bg">
+    <div id="root"></div>
+    <div id="pdd-ad-banner"><div id="pdd-ad-banner-slot"></div></div>
+    <div id="pdd-ad-interstitial-slot"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

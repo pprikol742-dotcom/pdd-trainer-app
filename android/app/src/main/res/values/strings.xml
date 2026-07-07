@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ПДД Тренажёр</string>
+    <string name="title_activity_main">ПДД Тренажёр</string>
+    <string name="package_name">ru.pddtrainer.app</string>
+    <string name="custom_url_scheme">ru.pddtrainer.app</string>
+</resources>
