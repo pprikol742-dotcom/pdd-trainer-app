@@ -12,71 +12,36 @@
       rel="stylesheet"
     />
     <title>ПДД Тренажёр</title>
-
-    <!--
-      Яндекс РСЯ, тот же JS-метод, что и в голосовом блокноте (для Capacitor/WebView
-      нативный SDK не обязателен). ID блоков ниже — ЗАГЛУШКИ. Реальные появятся только
-      после регистрации ЭТОГО приложения (ru.pddtrainer.app) в partner.yandex.ru —
-      блоки другого приложения сюда переносить нельзя, они привязаны к конкретному пакету.
-    -->
     <script src="https://yandex.ru/ads/system/context.js" async></script>
     <style>
-      #pdd-ad-banner {
+      #yandex-banner-wrap {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 40;
+        z-index: 9999;
         text-align: center;
         background: transparent;
-        transition: transform 0.2s ease;
-      }
-      #pdd-ad-banner.pdd-ad-hidden {
-        transform: translateY(100%);
       }
     </style>
-    <script>
-      window.PDD_AD_BLOCKS = {
-        banner: 'R-M-000000-1',       // ЗАМЕНИТЬ на реальный ID после регистрации в Яндекс.Партнёр
-        interstitial: 'R-M-000000-2', // ЗАМЕНИТЬ на реальный ID
-      };
-      window.pddAds = {
-        _bannerRendered: false,
-        showBanner: function () {
-          var el = document.getElementById('pdd-ad-banner');
-          if (el) el.classList.remove('pdd-ad-hidden');
-          if (this._bannerRendered) return;
-          this._bannerRendered = true;
-          window.yaContextCb = window.yaContextCb || [];
-          window.yaContextCb.push(function () {
-            Ya.Context.AdvManager.render({
-              blockId: window.PDD_AD_BLOCKS.banner,
-              renderTo: 'pdd-ad-banner-slot',
-            });
-          });
-        },
-        hideBanner: function () {
-          var el = document.getElementById('pdd-ad-banner');
-          if (el) el.classList.add('pdd-ad-hidden');
-        },
-        showInterstitial: function () {
-          window.yaContextCb = window.yaContextCb || [];
-          window.yaContextCb.push(function () {
-            Ya.Context.AdvManager.render({
-              blockId: window.PDD_AD_BLOCKS.interstitial,
-              renderTo: 'pdd-ad-interstitial-slot',
-              type: 'fullscreen',
-              onError: function () {},
-            });
-          });
-        },
-      };
-    </script>
   </head>
   <body class="bg-bg">
     <div id="root"></div>
-    <div id="pdd-ad-banner"><div id="pdd-ad-banner-slot"></div></div>
-    <div id="pdd-ad-interstitial-slot"></div>
+
+    <div id="yandex-banner-wrap">
+      <div id="yandex_rtb_R-M-19571366-1"></div>
+    </div>
+
+    <script>
+      window.yaContextCb = window.yaContextCb || [];
+      window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+          blockId: "R-M-19571366-1",
+          renderTo: "yandex_rtb_R-M-19571366-1"
+        });
+      });
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

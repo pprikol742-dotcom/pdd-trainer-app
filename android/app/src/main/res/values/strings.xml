@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">ПДД Тренажёр</string>
     <string name="title_activity_main">ПДД Тренажёр</string>
-    <string name="package_name">ru.pddtrainer.app</string>
-    <string name="custom_url_scheme">ru.pddtrainer.app</string>
+    <string name="package_name">ru.pddtrainer.appv2</string>
+    <string name="custom_url_scheme">ru.pddtrainer.appv2</string>
 </resources>
