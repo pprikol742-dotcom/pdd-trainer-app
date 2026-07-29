@@ -7,10 +7,10 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "ru.pddtrainer.appv2"
+    namespace "ru.pddtrainer.app"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "ru.pddtrainer.appv2"
+        applicationId "ru.pddtrainer.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
